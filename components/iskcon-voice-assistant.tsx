@@ -19,8 +19,8 @@ const SpiritualMessage: React.FC<{ type: "agent" | "user"; text: string }> = ({ 
     <div className="flex items-start space-x-4 mb-6 animate-fade-in">
       <div
         className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold shadow-lg ${
-          type === "agent" 
-            ? "bg-gradient-to-br from-blue-600 to-blue-800 border-2 border-yellow-400" 
+          type === "agent"
+            ? "bg-gradient-to-br from-blue-600 to-blue-800 border-2 border-yellow-400"
             : "bg-gradient-to-br from-orange-500 to-orange-600 border-2 border-yellow-300"
         }`}
       >
@@ -28,8 +28,8 @@ const SpiritualMessage: React.FC<{ type: "agent" | "user"; text: string }> = ({ 
       </div>
       <div
         className={`flex-1 p-4 rounded-2xl shadow-md relative overflow-hidden ${
-          type === "agent" 
-            ? "bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-500" 
+          type === "agent"
+            ? "bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-500"
             : "bg-gradient-to-br from-orange-50 to-yellow-50 border-l-4 border-orange-500"
         }`}
       >
@@ -39,9 +39,7 @@ const SpiritualMessage: React.FC<{ type: "agent" | "user"; text: string }> = ({ 
           </div>
         )}
         <p className="text-gray-800 leading-relaxed relative z-10">{text}</p>
-        {type === "agent" && (
-          <div className="mt-2 text-xs text-blue-600 font-medium">🙏 Prabhu Krishna Das</div>
-        )}
+        {type === "agent" && <div className="mt-2 text-xs text-blue-600 font-medium">🙏 Prabhu Krishna Das</div>}
       </div>
     </div>
   )
@@ -52,7 +50,9 @@ const SacredMandala: React.FC<{ state: string; isActive: boolean }> = ({ state, 
   return (
     <div className="relative w-48 h-48 mx-auto">
       {/* Outer rotating ring with mantras */}
-      <div className={`absolute inset-0 border-4 border-yellow-400 rounded-full ${isActive ? 'animate-spin-slow' : ''} opacity-60`}>
+      <div
+        className={`absolute inset-0 border-4 border-yellow-400 rounded-full ${isActive ? "animate-spin-slow" : ""} opacity-60`}
+      >
         <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
           <span className="text-xs text-yellow-600 font-bold">हरे</span>
         </div>
@@ -68,17 +68,20 @@ const SacredMandala: React.FC<{ state: string; isActive: boolean }> = ({ state, 
       </div>
 
       {/* Middle pulsing ring */}
-      <div className={`absolute inset-4 border-2 border-orange-400 rounded-full ${
-        state === 'listening' ? 'animate-pulse bg-orange-100' : 
-        state === 'speaking' ? 'animate-bounce bg-blue-100' : 'bg-white'
-      } shadow-lg`} />
+      <div
+        className={`absolute inset-4 border-2 border-orange-400 rounded-full ${
+          state === "listening"
+            ? "animate-pulse bg-orange-100"
+            : state === "speaking"
+              ? "animate-bounce bg-blue-100"
+              : "bg-white"
+        } shadow-lg`}
+      />
 
       {/* Inner sacred symbol */}
       <div className="absolute inset-8 bg-gradient-to-br from-blue-600 to-purple-700 rounded-full flex items-center justify-center shadow-xl">
         <div className="text-4xl text-white animate-pulse">
-          {state === 'listening' ? '🎧' : 
-           state === 'speaking' ? '🗣️' : 
-           state === 'thinking' ? '🧘' : '🕉️'}
+          {state === "listening" ? "🎧" : state === "speaking" ? "🗣️" : state === "thinking" ? "🧘" : "🕉️"}
         </div>
       </div>
 
@@ -90,12 +93,12 @@ const SacredMandala: React.FC<{ state: string; isActive: boolean }> = ({ state, 
               key={i}
               className={`absolute w-1 bg-gradient-to-t from-yellow-400 to-transparent opacity-60 animate-pulse`}
               style={{
-                height: '60px',
-                left: '50%',
-                top: '-30px',
-                transformOrigin: 'center 126px',
+                height: "60px",
+                left: "50%",
+                top: "-30px",
+                transformOrigin: "center 126px",
                 transform: `translateX(-50%) rotate(${i * 45}deg)`,
-                animationDelay: `${i * 0.2}s`
+                animationDelay: `${i * 0.2}s`,
               }}
             />
           ))}
@@ -144,7 +147,7 @@ const KrishnaVoiceInterface: React.FC = () => {
           <div className="absolute bottom-4 left-4 text-4xl">🕉️</div>
           <div className="absolute top-1/2 left-1/4 text-3xl">✨</div>
         </div>
-        
+
         <div className="flex items-center justify-between relative z-10">
           <div>
             <h2 className="text-3xl font-bold mb-2 flex items-center space-x-3">
@@ -179,18 +182,18 @@ const KrishnaVoiceInterface: React.FC = () => {
       {/* Sacred Mandala Visualization Area */}
       <div className="bg-gradient-to-b from-yellow-50 to-orange-50 p-8 border-b border-yellow-200">
         <SacredMandala state={state} isActive={state !== "idle"} />
-        
+
         {/* Audio Visualizer as Lotus Petals */}
         <div className="mt-6 flex justify-center">
           <div className="w-full max-w-lg bg-white/60 rounded-full p-4 backdrop-blur-sm">
-            <BarVisualizer 
-              state={state} 
-              barCount={16} 
-              trackRef={audioTrack} 
+            <BarVisualizer
+              state={state}
+              barCount={16}
+              trackRef={audioTrack}
               className="h-20"
               options={{
-                barColor: state === 'speaking' ? '#3b82f6' : '#f97316',
-                bgColor: 'transparent'
+                barColor: state === "speaking" ? "#3b82f6" : "#f97316",
+                bgColor: "transparent",
               }}
             />
           </div>
@@ -206,14 +209,15 @@ const KrishnaVoiceInterface: React.FC = () => {
             <span>Speak with devotion, listen with an open heart</span>
             <span>🪷</span>
           </p>
-          <p className="text-xs text-orange-600 mt-1">
-            सत्यम् शिवम् सुन्दरम् - Truth, Auspiciousness, Beauty
-          </p>
+          <p className="text-xs text-orange-600 mt-1">सत्यम् शिवम् सुन्दरम् - Truth, Auspiciousness, Beauty</p>
         </div>
       </div>
 
       {/* Spiritual Conversation Area */}
-      <div ref={chatContainerRef} className="h-[500px] overflow-y-auto p-8 bg-gradient-to-b from-white to-blue-50 relative">
+      <div
+        ref={chatContainerRef}
+        className="h-[500px] overflow-y-auto p-8 bg-gradient-to-b from-white to-blue-50 relative"
+      >
         {/* Background spiritual elements */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute top-10 right-10 text-8xl">🪷</div>
@@ -226,11 +230,9 @@ const KrishnaVoiceInterface: React.FC = () => {
             <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-600 to-purple-700 rounded-full flex items-center justify-center shadow-xl">
               <span className="text-white text-4xl">🕉️</span>
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-blue-800">
-              Hare Krishna! Welcome to Spiritual Guidance
-            </h3>
+            <h3 className="text-2xl font-bold mb-4 text-blue-800">Hare Krishna! Welcome to Spiritual Guidance</h3>
             <p className="text-lg mb-4 text-orange-700">🙏 हरे कृष्ण! आध्यात्मिक मार्गदर्शन में आपका स्वागत है</p>
-            
+
             <div className="grid md:grid-cols-2 gap-4 mt-8 max-w-2xl mx-auto">
               <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
                 <div className="text-2xl mb-2">📿</div>
@@ -249,7 +251,7 @@ const KrishnaVoiceInterface: React.FC = () => {
                 <p className="text-sm text-green-700">Learn about devotion, surrender & love of God</p>
               </div>
             </div>
-            
+
             <p className="text-sm mt-6 text-gray-600 italic">
               🎧 Start speaking to receive spiritual guidance from Prabhu Krishna Das
             </p>
@@ -316,7 +318,12 @@ const ISKCONSpiritualPage: React.FC = () => {
             href="/"
             className="mb-6 flex items-center space-x-3 text-orange-700 hover:text-blue-700 transition-colors group"
           >
-            <svg className="w-5 h-5 group-hover:transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-5 h-5 group-hover:transform group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             <span className="font-medium">🙏 Return to Divine Home</span>
@@ -353,13 +360,13 @@ const ISKCONSpiritualPage: React.FC = () => {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`
+                animationDuration: `${3 + Math.random() * 4}s`,
               }}
             >
               🪷
             </div>
           ))}
-          
+
           {/* Divine light rays */}
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-yellow-300/20 to-transparent rounded-full animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-blue-300/20 to-transparent rounded-full animate-pulse animation-delay-2000" />
@@ -373,26 +380,22 @@ const ISKCONSpiritualPage: React.FC = () => {
             <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl animate-pulse">
               <span className="text-6xl">🕉️</span>
             </div>
-            
+
             <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-orange-200 to-yellow-400 bg-clip-text text-transparent drop-shadow-2xl">
               Krishna Consciousness
             </h1>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-300 bg-clip-text text-transparent drop-shadow-xl">
               Voice Assistant
             </h2>
-            
-            <p className="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">
-              कृष्ण चेतना आवाज सहायक
-            </p>
-            
+
+            <p className="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">कृष्ण चेतना आवाज सहायक</p>
+
             <p className="text-xl text-yellow-200 mb-4 max-w-3xl mx-auto leading-relaxed">
               🙏 Receive divine guidance from an experienced ISKCON monk
             </p>
-            
-            <p className="text-lg text-blue-200 mb-8 max-w-3xl mx-auto">
-              अनुभवी इस्कॉन साधु से दिव्य मार्गदर्शन प्राप्त करें
-            </p>
+
+            <p className="text-lg text-blue-200 mb-8 max-w-3xl mx-auto">अनुभवी इस्कॉन साधु से दिव्य मार्गदर्शन प्राप्त करें</p>
 
             {/* Connect Button with Divine Animation */}
             <button
@@ -429,19 +432,19 @@ const ISKCONSpiritualPage: React.FC = () => {
               <h3 className="text-xl font-bold mb-3 text-blue-800">Bhakti Practices</h3>
               <p className="text-gray-700">Chanting, meditation, and devotional service guidance</p>
             </div>
-            
+
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div className="text-5xl mb-4 animate-bounce animation-delay-500">📖</div>
               <h3 className="text-xl font-bold mb-3 text-orange-800">Bhagavad Gita</h3>
               <p className="text-gray-700">Krishna's eternal wisdom and practical life guidance</p>
             </div>
-            
+
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-purple-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div className="text-5xl mb-4 animate-bounce animation-delay-1000">🪷</div>
               <h3 className="text-xl font-bold mb-3 text-purple-800">Spiritual Growth</h3>
               <p className="text-gray-700">Understanding karma, dharma, and life's purpose</p>
             </div>
-            
+
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-green-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div className="text-5xl mb-4 animate-bounce animation-delay-1500">🕉️</div>
               <h3 className="text-xl font-bold mb-3 text-green-800">Divine Love</h3>
@@ -454,13 +457,17 @@ const ISKCONSpiritualPage: React.FC = () => {
             <div className="bg-gradient-to-r from-blue-900/80 to-purple-900/80 backdrop-blur-sm rounded-3xl p-8 border border-yellow-300 shadow-2xl">
               <h3 className="text-3xl font-bold mb-6 text-yellow-300">🙏 Maha Mantra 🙏</h3>
               <p className="text-2xl text-white mb-4 leading-relaxed">
-                Hare Krishna Hare Krishna<br />
-                Krishna Krishna Hare Hare<br />
-                Hare Rama Hare Rama<br />
+                Hare Krishna Hare Krishna
+                <br />
+                Krishna Krishna Hare Hare
+                <br />
+                Hare Rama Hare Rama
+                <br />
                 Rama Rama Hare Hare
               </p>
               <p className="text-lg text-blue-200">
-                हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे<br />
+                हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे
+                <br />
                 हरे राम हरे राम राम राम हरे हरे
               </p>
             </div>
@@ -473,7 +480,7 @@ const ISKCONSpiritualPage: React.FC = () => {
               <div>
                 <h4 className="font-bold mb-2 text-lg">Spiritual Guidance Notice</h4>
                 <p className="text-sm leading-relaxed">
-                  This AI assistant shares wisdom from ISKCON tradition and Vedic scriptures for spiritual inspiration. 
+                  This AI assistant shares wisdom from ISKCON tradition and Vedic scriptures for spiritual inspiration.
                   For deeper understanding, always study under qualified spiritual teachers and authentic scriptures.
                   Regular chanting, temple association, and guru guidance are essential for spiritual progress.
                 </p>
