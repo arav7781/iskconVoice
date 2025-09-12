@@ -207,22 +207,28 @@ const SpiritualAssistantPage: React.FC = () => {
   const [currentShloka] = useState(() => bhagavadGitaShlokas[Math.floor(Math.random() * bhagavadGitaShlokas.length)])
 
   const connectToAgent = useCallback(async () => {
+    console.log("[v0] Connect button clicked, starting connection process")
     setIsConnecting(true)
     try {
       const userName = `devotee-${Math.random().toString(36).substring(7)}`
+      console.log("[v0] Generated username:", userName)
+
       const response = await fetch(
-        `https://aravsaxena884-iskcon.hf.space/getToken?name=${encodeURIComponent(userName)}`,
+        `https://aravsaxena884-voiceLegal.hf.space/getToken?name=${encodeURIComponent(userName)}`,
       )
+      console.log("[v0] API response status:", response.status)
 
       if (!response.ok) {
         throw new Error("Failed to get token")
       }
 
       const tokenData = await response.text()
+      console.log("[v0] Received token, length:", tokenData.length)
       setToken(tokenData)
       setIsConnected(true)
+      console.log("[v0] Connection successful, showing voice interface")
     } catch (error) {
-      console.error("Connection error:", error)
+      console.error("[v0] Connection error:", error)
       alert("Failed to connect to spiritual assistant. Please try again with devotion. 🙏")
     } finally {
       setIsConnecting(false)
@@ -270,8 +276,8 @@ const SpiritualAssistantPage: React.FC = () => {
       <main className="container mx-auto px-6 py-20 text-center relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="mb-16">
-            <div className="w-32 h-32 mx-auto mb-8 temple-gradient rounded-full flex items-center justify-center shadow-2xl border-4 border-secondary">
-              <span className="text-5xl text-white">🕉️</span>
+            <div className="w-32 h-32 mx-auto mb-8 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-secondary">
+              <span className="text-5xl text-primary">🕉️</span>
             </div>
             <h1 className="text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               Krishna Voice Assistant
@@ -281,10 +287,10 @@ const SpiritualAssistantPage: React.FC = () => {
             </h2>
 
             <div className="max-w-4xl mx-auto mb-12 p-8 bg-card rounded-3xl shadow-2xl border-2 border-primary/20">
-              <div className="text-secondary text-lg font-bold mb-4 flex items-center justify-center gap-2">
-                <span>🪷</span>
+              <div className="text-primary text-lg font-bold mb-4 flex items-center justify-center gap-2">
+                <span className="text-primary">🪷</span>
                 {currentShloka.chapter}
-                <span>🪷</span>
+                <span className="text-primary">🪷</span>
               </div>
               <div className="text-2xl font-bold text-foreground mb-6 text-balance leading-relaxed">
                 {currentShloka.sanskrit}
