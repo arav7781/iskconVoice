@@ -471,20 +471,22 @@ export default function ISKCONLandingPage() {
 
               {/* Right Side Floating Icons / Image */}
               <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-blue-600/20 to-teal-600/20 rounded-3xl flex items-center justify-center text-9xl animate-float">
-                  🏛️
-                </div>
-
-                {/* Keep 🕉️ + add Krishna image inside */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full flex items-center justify-center text-4xl animate-float-reverse relative overflow-hidden shadow-lg">
+                {/* House Container with Krishna Image */}
+                <div className="aspect-square bg-gradient-to-br from-blue-600/20 to-teal-600/20 rounded-3xl flex items-center justify-center text-9xl animate-float relative overflow-hidden">
                   <img
                     src="/krishna.png"
                     alt="Krishna"
-                    className="absolute inset-0 w-full h-full object-cover opacity-70"
+                    className="absolute inset-0 w-full h-full object-contain opacity-80"
                   />
-                  <span className="relative z-10">🕉️</span>
+                  <span className="relative z-10">🏛️</span>
                 </div>
 
+                {/* Floating Circle with 🕉️ */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-teal-600 to-emerald-600 rounded-full flex items-center justify-center text-4xl animate-float-reverse">
+                  🕉️
+                </div>
+
+                {/* Floating Circle with 🪷 */}
                 <div
                   className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-3xl animate-float"
                   style={{ animationDelay: "2s" }}
