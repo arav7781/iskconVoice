@@ -164,28 +164,6 @@ const VoiceAssistantInterface: React.FC = () => {
               🗣️ Seek spiritual guidance rooted in the eternal wisdom of Bhagavad Gita and the divine teachings of His
               Divine Grace A.C. Bhaktivedanta Swami Prabhupada. Let Krishna consciousness illuminate your path.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <div className="bg-card p-6 rounded-2xl border-2 border-primary/20 hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">📿</div>
-                <p className="text-sm font-bold text-primary">Japa Meditation</p>
-                <p className="text-xs text-muted-foreground mt-2">Sacred chanting guidance</p>
-              </div>
-              <div className="bg-card p-6 rounded-2xl border-2 border-secondary/20 hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">📖</div>
-                <p className="text-sm font-bold text-secondary">Sacred Scriptures</p>
-                <p className="text-xs text-muted-foreground mt-2">Gita & Bhagavatam insights</p>
-              </div>
-              <div className="bg-card p-6 rounded-2xl border-2 border-primary/20 hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">🏛️</div>
-                <p className="text-sm font-bold text-primary">Devotional Service</p>
-                <p className="text-xs text-muted-foreground mt-2">Seva & Krishna consciousness</p>
-              </div>
-              <div className="bg-card p-6 rounded-2xl border-2 border-secondary/20 hover:shadow-xl transition-all duration-300">
-                <div className="text-3xl mb-3">🧘</div>
-                <p className="text-sm font-bold text-secondary">Spiritual Sadhana</p>
-                <p className="text-xs text-muted-foreground mt-2">Daily practice guidance</p>
-              </div>
-            </div>
           </div>
         ) : (
           <div className="space-y-6">
@@ -207,28 +185,23 @@ const SpiritualAssistantPage: React.FC = () => {
   const [currentShloka] = useState(() => bhagavadGitaShlokas[Math.floor(Math.random() * bhagavadGitaShlokas.length)])
 
   const connectToAgent = useCallback(async () => {
-    console.log("[v0] Connect button clicked, starting connection process")
     setIsConnecting(true)
     try {
       const userName = `devotee-${Math.random().toString(36).substring(7)}`
-      console.log("[v0] Generated username:", userName)
 
       const response = await fetch(
         `https://aravsaxena884-voiceLegal.hf.space/getToken?name=${encodeURIComponent(userName)}`,
       )
-      console.log("[v0] API response status:", response.status)
 
       if (!response.ok) {
         throw new Error("Failed to get token")
       }
 
       const tokenData = await response.text()
-      console.log("[v0] Received token, length:", tokenData.length)
       setToken(tokenData)
       setIsConnected(true)
-      console.log("[v0] Connection successful, showing voice interface")
     } catch (error) {
-      console.error("[v0] Connection error:", error)
+      console.error("Connection error:", error)
       alert("Failed to connect to spiritual assistant. Please try again with devotion. 🙏")
     } finally {
       setIsConnecting(false)
