@@ -478,7 +478,7 @@ export default function ISKCONLandingPage() {
                     alt="Krishna"
                     className="absolute inset-0 w-full h-full object-contain opacity-80"
                   />
-                  <span className="relative z-10">🏛️</span>
+                  <span className="relative z-10"></span>
                 </div>
 
                 {/* Floating Circle with 🕉️ */}
