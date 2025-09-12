@@ -475,13 +475,14 @@ export default function ISKCONLandingPage() {
                   🏛️
                 </div>
 
-                {/* Replaced 🕉️ with Krishna Image */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full overflow-hidden shadow-lg animate-float-reverse">
+                {/* Keep 🕉️ + add Krishna image inside */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full flex items-center justify-center text-4xl animate-float-reverse relative overflow-hidden shadow-lg">
                   <img
                     src="/krishna.png"
                     alt="Krishna"
-                    className="w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover opacity-70"
                   />
+                  <span className="relative z-10">🕉️</span>
                 </div>
 
                 <div
