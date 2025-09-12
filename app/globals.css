@@ -4,75 +4,539 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Krishna-themed temple color palette */
-  --background: #ffffff; /* Pure white temple ambiance */
-  --foreground: #374151; /* Deep gray for text */
-  --card: #fef2f2; /* Soft pink for cards */
-  --card-foreground: #374151; /* Dark gray for card text */
-  --popover: #ffffff; /* White for popovers */
-  --popover-foreground: #374151; /* Dark text for popovers */
-  --primary: #dc2626; /* Krishna red for devotion */
-  --primary-foreground: #ffffff; /* White text on primary */
-  --secondary: #f59e0b; /* Golden yellow for divinity */
-  --secondary-foreground: #ffffff; /* White text on secondary */
-  --muted: #f8fafc; /* Very light gray */
-  --muted-foreground: #6b7280; /* Medium gray */
-  --accent: #f59e0b; /* Golden yellow for accents */
-  --accent-foreground: #ffffff; /* White text on accent */
-  --destructive: #dc2626; /* Red for destructive actions */
-  --destructive-foreground: #ffffff; /* White text on destructive */
-  --border: #e5e7eb; /* Light gray borders */
-  --input: #f8fafc; /* Light input background */
-  --ring: #dc2626; /* Primary color ring */
-  --chart-1: oklch(0.55 0.25 260);
-  --chart-2: oklch(0.6 0.25 280);
-  --chart-3: oklch(0.7 0.25 60);
-  --chart-4: oklch(0.6 0.25 220);
-  --chart-5: oklch(0.65 0.25 160);
-  --radius: 0.75rem;
-  --sidebar: #fef2f2;
-  --sidebar-foreground: #374151;
-  --sidebar-primary: #dc2626;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f59e0b;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: #dc2626;
+  /* Updated color palette for ISKCON spiritual theme */
+  --background: oklch(0.98 0.02 240); /* Light blue background */
+  --foreground: oklch(0.2 0.05 240); /* Dark blue-gray text */
+  --card: oklch(1 0 0); /* Pure white cards */
+  --card-foreground: oklch(0.25 0.05 240); /* Dark text on cards */
+  --popover: oklch(1 0 0); /* White popovers */
+  --popover-foreground: oklch(0.25 0.05 240); /* Dark text in popovers */
+  --primary: oklch(0.35 0.15 240); /* Deep blue primary */
+  --primary-foreground: oklch(0.98 0.02 60); /* Light golden text on primary */
+  --secondary: oklch(0.75 0.12 60); /* Golden yellow secondary */
+  --secondary-foreground: oklch(0.2 0.05 240); /* Dark text on secondary */
+  --muted: oklch(0.95 0.02 240); /* Light muted blue */
+  --muted-foreground: oklch(0.45 0.05 240); /* Medium gray text */
+  --accent: oklch(0.65 0.15 30); /* Soft orange accent */
+  --accent-foreground: oklch(0.98 0.02 60); /* Light text on accent */
+  --destructive: oklch(0.55 0.25 25); /* Red for destructive actions */
+  --destructive-foreground: oklch(0.98 0.02 60); /* Light text on destructive */
+  --border: oklch(0.9 0.02 240); /* Light border */
+  --input: oklch(1 0 0); /* White input fields */
+  --ring: oklch(0.35 0.15 240 / 0.5); /* Semi-transparent ring */
+  --chart-1: oklch(0.35 0.15 240); /* Deep blue for charts */
+  --chart-2: oklch(0.75 0.12 60); /* Golden for charts */
+  --chart-3: oklch(0.65 0.15 30); /* Orange for charts */
+  --chart-4: oklch(0.95 0.02 240); /* Light blue for charts */
+  --chart-5: oklch(0.45 0.05 240); /* Medium gray for charts */
+  --radius: 0.75rem; /* Rounded corners for spiritual feel */
+  --sidebar: oklch(1 0 0); /* White sidebar */
+  --sidebar-foreground: oklch(0.25 0.05 240); /* Dark sidebar text */
+  --sidebar-primary: oklch(0.95 0.02 240); /* Light blue sidebar background */
+  --sidebar-primary-foreground: oklch(0.25 0.05 240); /* Dark sidebar text */
+  --sidebar-accent: oklch(0.75 0.12 60); /* Golden sidebar accents */
+  --sidebar-accent-foreground: oklch(0.2 0.05 240); /* Dark text on sidebar accents */
+  --sidebar-border: oklch(0.9 0.02 240); /* Light sidebar borders */
+  --sidebar-ring: oklch(0.35 0.15 240 / 0.5); /* Semi-transparent sidebar ring */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Dark mode colors maintaining ISKCON theme */
+  --background: oklch(0.08 0.05 240); /* Very dark blue background */
+  --foreground: oklch(0.95 0.02 60); /* Light golden text */
+  --card: oklch(0.12 0.05 240); /* Dark blue cards */
+  --card-foreground: oklch(0.95 0.02 60); /* Light text on cards */
+  --popover: oklch(0.12 0.05 240); /* Dark popovers */
+  --popover-foreground: oklch(0.95 0.02 60); /* Light text in popovers */
+  --primary: oklch(0.75 0.12 60); /* Golden primary in dark mode */
+  --primary-foreground: oklch(0.08 0.05 240); /* Dark text on primary */
+  --secondary: oklch(0.25 0.08 240); /* Dark blue secondary */
+  --secondary-foreground: oklch(0.95 0.02 60); /* Light text on secondary */
+  --muted: oklch(0.15 0.05 240); /* Dark muted */
+  --muted-foreground: oklch(0.65 0.05 240); /* Medium light text */
+  --accent: oklch(0.65 0.15 30); /* Orange accent */
+  --accent-foreground: oklch(0.95 0.02 60); /* Light text on accent */
+  --destructive: oklch(0.45 0.2 25); /* Darker red */
+  --destructive-foreground: oklch(0.95 0.02 60); /* Light text on destructive */
+  --border: oklch(0.2 0.05 240); /* Dark border */
+  --input: oklch(0.15 0.05 240); /* Dark input */
+  --ring: oklch(0.75 0.12 60 / 0.5); /* Golden ring */
+  --chart-1: oklch(0.75 0.12 60); /* Golden for charts */
+  --chart-2: oklch(0.65 0.15 30); /* Orange for charts */
+  --chart-3: oklch(0.55 0.15 180); /* Cyan for charts */
+  --chart-4: oklch(0.45 0.1 300); /* Purple for charts */
+  --chart-5: oklch(0.35 0.15 240); /* Blue for charts */
+  --sidebar: oklch(0.1 0.05 240); /* Dark sidebar */
+  --sidebar-foreground: oklch(0.95 0.02 60); /* Light sidebar text */
+  --sidebar-primary: oklch(0.75 0.12 60); /* Golden sidebar primary */
+  --sidebar-primary-foreground: oklch(0.08 0.05 240); /* Dark text on sidebar primary */
+  --sidebar-accent: oklch(0.15 0.05 240); /* Dark sidebar accent */
+  --sidebar-accent-foreground: oklch(0.95 0.02 60); /* Light text on sidebar accent */
+  --sidebar-border: oklch(0.2 0.05 240); /* Dark sidebar border */
+  --sidebar-ring: oklch(0.75 0.12 60 / 0.5); /* Golden sidebar ring */
+}
+
+/* Added custom animations for ISKCON spiritual elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(20px) rotate(-5deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.6);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Added peacock-themed gradient animations for enhanced hero section */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes peacock-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    background-position: 25% 50%;
+    filter: hue-rotate(10deg) brightness(1.1);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(20deg) brightness(1.2);
+  }
+  75% {
+    background-position: 75% 50%;
+    filter: hue-rotate(10deg) brightness(1.1);
+  }
+}
+
+/* Added enhanced 3D text effects and Krishna consciousness styling */
+@keyframes text-glow-3d {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(20, 184, 166, 0.4), 0 0 15px rgba(16, 185, 129, 0.3), 0
+      0 20px rgba(6, 182, 212, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateZ(0);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(20, 184, 166, 0.6), 0 0 30px rgba(16, 185, 129, 0.5), 0
+      0 40px rgba(6, 182, 212, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateZ(10px);
+  }
+}
+
+@keyframes divine-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3)) drop-shadow(0 0 10px rgba(20, 184, 166, 0.2))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transform: scale(1) rotateX(0deg);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.6)) drop-shadow(0 0 25px rgba(20, 184, 166, 0.4))
+      drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    transform: scale(1.02) rotateX(2deg);
+  }
+}
+
+@keyframes krishna-aura {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(20, 184, 166, 0.2), 0 0 60px rgba(16, 185, 129, 0.1),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 0 60px rgba(20, 184, 166, 0.4), 0 0 90px rgba(16, 185, 129, 0.3),
+      inset 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes om-sacred-rotation {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg) brightness(1) saturate(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.05);
+    filter: hue-rotate(15deg) brightness(1.1) saturate(1.2);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+    filter: hue-rotate(30deg) brightness(1.2) saturate(1.4);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.05);
+    filter: hue-rotate(15deg) brightness(1.1) saturate(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: hue-rotate(0deg) brightness(1) saturate(1);
+  }
+}
+
+/* Adding peacock feather specific animations for realistic 3D movement */
+@keyframes feather-sway {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateX(2px) rotate(1deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-1px) rotate(-0.5deg);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateX(1px) rotate(0.5deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(4px) rotate(-1deg);
+  }
+}
+
+@keyframes peacock-eye-shimmer {
+  0%,
+  100% {
+    filter: hue-rotate(0deg) brightness(1) saturate(1);
+  }
+  25% {
+    filter: hue-rotate(15deg) brightness(1.1) saturate(1.2);
+  }
+  50% {
+    filter: hue-rotate(30deg) brightness(1.2) saturate(1.4);
+  }
+  75% {
+    filter: hue-rotate(15deg) brightness(1.1) saturate(1.2);
+  }
+}
+
+/* Adding animation classes for peacock feather components */
+.animate-feather-sway {
+  animation: feather-sway 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+.animate-peacock-eye-shimmer {
+  animation: peacock-eye-shimmer 6s ease-in-out infinite;
+}
+
+/* Adding peacock wave animations and enhanced 3D effects */
+@keyframes peacock-wave-1 {
+  0%,
+  100% {
+    transform: translateX(-100%) translateY(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateX(100vw) translateY(-20px) rotate(180deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes peacock-wave-2 {
+  0%,
+  100% {
+    transform: translateX(100vw) translateY(0) rotate(0deg);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateX(-100%) translateY(-30px) rotate(-180deg);
+    opacity: 0.25;
+  }
+}
+
+@keyframes peacock-wave-3 {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(50px) rotate(45deg);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translateX(150%) translateY(-50px) rotate(225deg);
+    opacity: 0.2;
+  }
+}
+
+@keyframes peacock-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(20, 184, 166, 0.3), 0 0 60px rgba(16, 185, 129, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  33% {
+    box-shadow: 0 0 30px rgba(20, 184, 166, 0.5), 0 0 50px rgba(16, 185, 129, 0.4), 0 0 70px rgba(6, 182, 212, 0.3),
+      inset 0 0 25px rgba(255, 255, 255, 0.15);
+    filter: hue-rotate(15deg) brightness(1.1);
+  }
+  66% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.6), 0 0 45px rgba(6, 182, 212, 0.5), 0 0 65px rgba(59, 130, 246, 0.4),
+      inset 0 0 30px rgba(255, 255, 255, 0.2);
+    filter: hue-rotate(30deg) brightness(1.2);
+  }
+}
+
+@keyframes sacred-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotateZ(0deg);
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+  }
+  50% {
+    transform: scale(1.05) rotateZ(5deg);
+    filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.5));
+  }
+}
+
+@keyframes text-3d {
+  0%,
+  100% {
+    text-shadow:
+      0 1px 0 rgba(59, 130, 246, 0.8),
+      0 2px 0 rgba(20, 184, 166, 0.7),
+      0 3px 0 rgba(16, 185, 129, 0.6),
+      0 4px 0 rgba(6, 182, 212, 0.5),
+      0 5px 10px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 2px 0 rgba(59, 130, 246, 0.9),
+      0 4px 0 rgba(20, 184, 166, 0.8),
+      0 6px 0 rgba(16, 185, 129, 0.7),
+      0 8px 0 rgba(6, 182, 212, 0.6),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(20, 184, 166, 0.6);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-reverse {
+  animation: float-reverse 8s ease-in-out infinite;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite, krishna-aura 4s ease-in-out infinite;
+}
+.animate-scroll-left {
+  animation: scroll-left linear infinite;
+}
+.animate-scroll-right {
+  animation: scroll-right linear infinite;
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Added new peacock-themed animation classes */
+.animate-gradient-x {
+  background-size: 300% 300%;
+  animation: gradient-x 6s ease infinite, text-glow-3d 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-peacock-shimmer {
+  background-size: 400% 400%;
+  animation: peacock-shimmer 8s ease-in-out infinite;
+}
+
+/* Added 3D text effect classes for Krishna consciousness theme */
+.text-3d-krishna {
+  animation: text-glow-3d 3s ease-in-out infinite, divine-pulse 5s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.om-sacred {
+  animation: om-sacred-rotation 12s linear infinite, krishna-aura 6s ease-in-out infinite;
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+
+.bg-300 {
+  background-size: 300% 300%;
+}
+
+/* Infinite scroll container styles */
+.infinite-scroll-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.infinite-scroll-content {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+}
+
+/* Spiritual particle effects */
+.spiritual-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.spiritual-particles::before,
+.spiritual-particles::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.spiritual-particles::before {
+  top: 20%;
+  left: 10%;
+  animation-delay: -2s;
+}
+
+.spiritual-particles::after {
+  top: 60%;
+  right: 15%;
+  animation-delay: -4s;
+}
+
+/* Adding peacock wave elements styling */
+.peacock-wave-1,
+.peacock-wave-2,
+.peacock-wave-3 {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background: linear-gradient(
+    45deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(20, 184, 166, 0.15) 25%,
+    rgba(16, 185, 129, 0.2) 50%,
+    rgba(6, 182, 212, 0.15) 75%,
+    rgba(59, 130, 246, 0.1) 100%
+  );
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  filter: blur(1px);
+}
+
+.peacock-wave-1 {
+  top: 20%;
+  animation: peacock-wave-1 25s linear infinite;
+  animation-delay: 0s;
+}
+
+.peacock-wave-2 {
+  top: 60%;
+  animation: peacock-wave-2 30s linear infinite;
+  animation-delay: -10s;
+}
+
+.peacock-wave-3 {
+  top: 40%;
+  animation: peacock-wave-3 35s linear infinite;
+  animation-delay: -20s;
+}
+
+/* Enhanced animation classes for peacock theme */
+.animate-peacock-glow {
+  animation: peacock-glow 6s ease-in-out infinite;
+}
+
+.animate-sacred-pulse {
+  animation: sacred-pulse 4s ease-in-out infinite;
+}
+
+.text-3d {
+  animation: text-3d 3s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
 @theme inline {
@@ -121,119 +585,6 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
   }
-}
-
-/* Enhanced spiritual animations and effects */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(5deg);
-  }
-}
-
-@keyframes glow {
-  0%,
-  100% {
-    box-shadow: 0 0 30px rgba(220, 38, 38, 0.4), 0 0 60px rgba(245, 158, 11, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 50px rgba(220, 38, 38, 0.7), 0 0 80px rgba(245, 158, 11, 0.4);
-  }
-}
-
-@keyframes lotus-bloom {
-  0% {
-    transform: scale(0.9) rotate(0deg);
-    opacity: 0.8;
-  }
-  33% {
-    transform: scale(1.1) rotate(120deg);
-    opacity: 1;
-  }
-  66% {
-    transform: scale(0.95) rotate(240deg);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1) rotate(360deg);
-    opacity: 0.85;
-  }
-}
-
-@keyframes temple-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes divine-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  50% {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-  }
-}
-
-@keyframes peacock-dance {
-  0%,
-  100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(10px) rotate(5deg);
-  }
-  75% {
-    transform: translateX(-10px) rotate(-5deg);
-  }
-}
-
-.float-animation {
-  animation: float 4s ease-in-out infinite;
-}
-
-.glow-animation {
-  animation: glow 3s ease-in-out infinite;
-}
-
-.lotus-animation {
-  animation: lotus-bloom 6s ease-in-out infinite;
-}
-
-.temple-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.3), transparent);
-  background-size: 200% 100%;
-  animation: temple-shimmer 3s infinite;
-}
-
-.divine-pulse {
-  animation: divine-pulse 2s ease-in-out infinite;
-}
-
-.peacock-dance {
-  animation: peacock-dance 5s ease-in-out infinite;
-}
-
-/* Temple architecture inspired gradients */
-.temple-gradient {
-  background: linear-gradient(135deg, #dc2626 0%, #f59e0b 50%, #dc2626 100%);
-}
-
-.vrindavan-gradient {
-  background: linear-gradient(45deg, #fef2f2 0%, #ffffff 50%, #fef2f2 100%);
-}
-
-.krishna-gradient {
-  background: linear-gradient(180deg, #1e40af 0%, #dc2626 50%, #f59e0b 100%);
 }
