@@ -424,6 +424,7 @@ export default function ISKCONLandingPage() {
             className="max-w-6xl mx-auto"
           >
             <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side Content */}
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-8">
                   About{" "}
@@ -433,40 +434,56 @@ export default function ISKCONLandingPage() {
                 </h2>
                 <div className="space-y-6 text-lg text-foreground/80 leading-relaxed">
                   <p>
-                    The International Society for Krishna Consciousness (ISKCON) was founded in 1966 by His Divine Grace
-                    A.C. Bhaktivedanta Swami Prabhupada to teach the science of Krishna consciousness throughout the
-                    world based on the teachings of the Bhagavad-gita and other Vedic scriptures.
+                    The International Society for Krishna Consciousness (ISKCON) was
+                    founded in 1966 by His Divine Grace A.C. Bhaktivedanta Swami
+                    Prabhupada to teach the science of Krishna consciousness
+                    throughout the world based on the teachings of the Bhagavad-gita
+                    and other Vedic scriptures.
                   </p>
                   <p>
-                    ISKCON belongs to the Gaudiya-Vaishnava sampradaya, a monotheistic tradition within the Vedic
-                    culture. Today ISKCON comprises of more than 400 temples, 40 rural communities, 26 educational
-                    institutes and 45 restaurants worldwide.
+                    ISKCON belongs to the Gaudiya-Vaishnava sampradaya, a monotheistic
+                    tradition within the Vedic culture. Today ISKCON comprises of more
+                    than 400 temples, 40 rural communities, 26 educational institutes
+                    and 45 restaurants worldwide.
                   </p>
                   <p>
-                    Our mission is to promote the well-being of society by teaching the science of Krishna consciousness
-                    according to the Bhagavad-gita and other ancient scriptures.
+                    Our mission is to promote the well-being of society by teaching
+                    the science of Krishna consciousness according to the
+                    Bhagavad-gita and other ancient scriptures.
                   </p>
                 </div>
 
                 <div className="mt-8 grid grid-cols-2 gap-6">
                   <div className="text-center p-4 bg-card rounded-lg border border-primary/20">
                     <div className="text-3xl font-bold text-primary mb-2">400+</div>
-                    <div className="text-sm text-muted-foreground">Temples Worldwide</div>
+                    <div className="text-sm text-muted-foreground">
+                      Temples Worldwide
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-card rounded-lg border border-secondary/20">
                     <div className="text-3xl font-bold text-secondary mb-2">50+</div>
-                    <div className="text-sm text-muted-foreground">Years of Service</div>
+                    <div className="text-sm text-muted-foreground">
+                      Years of Service
+                    </div>
                   </div>
                 </div>
               </div>
 
+              {/* Right Side Floating Icons / Image */}
               <div className="relative">
                 <div className="aspect-square bg-gradient-to-br from-blue-600/20 to-teal-600/20 rounded-3xl flex items-center justify-center text-9xl animate-float">
                   🏛️
                 </div>
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-teal-600 to-emerald-600 rounded-full flex items-center justify-center text-4xl animate-float-reverse">
-                  🕉️
+
+                {/* Replaced 🕉️ with Krishna Image */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full overflow-hidden shadow-lg animate-float-reverse">
+                  <img
+                    src="/krishna.png"
+                    alt="Krishna"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+
                 <div
                   className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-3xl animate-float"
                   style={{ animationDelay: "2s" }}
@@ -478,6 +495,7 @@ export default function ISKCONLandingPage() {
           </motion.div>
         </div>
       </section>
+
 
       {/* Spiritual Journey Section */}
       <section id="spiritual-journey" className="py-20 relative">
