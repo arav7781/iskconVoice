@@ -190,7 +190,7 @@ const SpiritualAssistantPage: React.FC = () => {
       const userName = `devotee-${Math.random().toString(36).substring(7)}`
 
       const response = await fetch(
-        `https://aravsaxena884-voiceLegal.hf.space/getToken?name=${encodeURIComponent(userName)}`,
+        `https://aravsaxena884-iskcon.hf.space/getToken?name=${encodeURIComponent(userName)}`,
       )
 
       if (!response.ok) {
