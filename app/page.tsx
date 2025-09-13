@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, Calendar, Star, Quote, ArrowRight, ChevronDown, MapPin, Clock, Phone, Mail } from "lucide-react"
+import { Calendar, Star, Quote, ArrowRight, ChevronDown, MapPin, Clock, Phone, Mail } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 
@@ -381,10 +381,11 @@ export default function ISKCONLandingPage() {
             <Button
               variant="outline"
               size="lg"
-              className="px-8 py-6 text-lg border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white transition-all duration-300 bg-white/90 backdrop-blur-sm font-semibold"
+              className="px-8 py-6 text-lg border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white transition-all duration-300 bg-white/90 backdrop-blur-sm font-semibold"
+              onClick={() => router.push("/chatbot")}
             >
-              <BookOpen className="mr-2 h-5 w-5" />
-              Explore Teachings
+              <span className="mr-2 text-xl">🤖</span>
+              Spiritual Chatbot
             </Button>
           </motion.div>
 
@@ -816,7 +817,28 @@ export default function ISKCONLandingPage() {
               </div>
             </div>
 
-            
+            <div className="text-center py-12 border-t border-b border-blue-600/10">
+              <div className="max-w-4xl mx-auto">
+                <h4 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-700 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient bg-300% animate-gradient-x filter drop-shadow-lg text-3d">
+                  The Maha Mantra
+                </h4>
+                <div className="bg-card/30 backdrop-blur-sm rounded-2xl p-8 border border-blue-600/20">
+                  <p className="text-2xl md:text-3xl font-bold mb-4 leading-relaxed text-blue-700">
+                    Hare Krishna Hare Krishna Krishna Krishna Hare Hare
+                    <br />
+                    Hare Rama Hare Rama Rama Rama Hare Hare
+                  </p>
+                  <p className="text-lg md:text-xl text-teal-600 mb-4 leading-relaxed">
+                    हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे
+                    <br />
+                    हरे राम हरे राम राम राम हरे हरे
+                  </p>
+                  <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                    This sacred mantra purifies the heart and awakens our dormant love for Krishna
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="pt-8 text-center">
               <p className="text-muted-foreground mb-2">
