@@ -79,7 +79,7 @@ const SacredMandala: React.FC<{ state: string; isActive: boolean }> = ({ state, 
       />
 
       {/* Inner sacred symbol */}
-      <div className="absolute inset-8 bg-gradient-to-br from-blue-600 to-purple-700 rounded-full flex items-center justify-center shadow-xl">
+      <div className="absolute inset-8 bg-gradient-to-br from-blue-600 to-orange-600 rounded-full flex items-center justify-center shadow-xl">
         <div className="text-4xl text-white animate-pulse">
           {state === "listening" ? "🎧" : state === "speaking" ? "🗣️" : state === "thinking" ? "🧘" : "🕉️"}
         </div>
@@ -141,7 +141,7 @@ const KrishnaVoiceInterface: React.FC = () => {
   return (
     <div className="w-full max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-yellow-200">
       {/* Divine Header */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 p-8 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 via-orange-600 to-blue-800 p-8 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-4 right-4 text-6xl">🪷</div>
           <div className="absolute bottom-4 left-4 text-4xl">🕉️</div>
@@ -274,6 +274,10 @@ const ISKCONSpiritualPage: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false)
   const [token, setToken] = useState<string | null>(null)
 
+  useEffect(() => {
+    connectToSpirtualGuide()
+  }, [])
+
   const connectToSpirtualGuide = useCallback(async () => {
     setIsConnecting(true)
     try {
@@ -302,15 +306,92 @@ const ISKCONSpiritualPage: React.FC = () => {
     setToken(null)
   }, [])
 
+  if (isConnecting) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-orange-600 to-blue-800 relative overflow-hidden flex items-center justify-center">
+        {/* Divine Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-10">
+            {/* Floating lotus petals */}
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute text-4xl opacity-30 animate-float-random`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${3 + Math.random() * 4}s`,
+                }}
+              >
+                🪷
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center text-white relative z-10">
+          <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl animate-pulse">
+            <span className="text-6xl">🕉️</span>
+          </div>
+
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-300 via-orange-200 to-yellow-400 bg-clip-text text-transparent">
+            Connecting to Divine Wisdom
+          </h2>
+
+          <p className="text-xl text-blue-200 mb-6">🙏 Please wait while we establish spiritual connection...</p>
+
+          <div className="flex items-center justify-center space-x-3">
+            <svg className="animate-spin w-8 h-8 text-yellow-300" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            <span className="text-lg text-yellow-200">Establishing connection...</span>
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes float-random {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+          }
+          
+          .animate-float-random { animation: float-random 4s ease-in-out infinite; }
+        `}</style>
+      </div>
+    )
+  }
+
   if (isConnected && token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-orange-100 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-orange-50 to-blue-100 relative overflow-hidden">
         {/* Floating spiritual elements */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-10 left-10 text-4xl opacity-20 animate-float">🪷</div>
-          <div className="absolute top-20 right-20 text-3xl opacity-15 animate-float-delay-1">✨</div>
-          <div className="absolute bottom-20 left-20 text-5xl opacity-10 animate-float-delay-2">🕉️</div>
-          <div className="absolute bottom-10 right-10 text-3xl opacity-20 animate-float-delay-3">🙏</div>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-10">
+            {/* Floating lotus petals */}
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute text-4xl opacity-30 animate-float-random`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${3 + Math.random() * 4}s`,
+                }}
+              >
+                🪷
+              </div>
+            ))}
+
+            {/* Divine light rays */}
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-yellow-300/20 to-transparent rounded-full animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-blue-300/20 to-transparent rounded-full animate-pulse animation-delay-2000" />
+          </div>
         </div>
 
         <div className="container mx-auto px-4 py-8 relative z-10">
@@ -347,199 +428,36 @@ const ISKCONSpiritualPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-orange-600 relative overflow-hidden">
-      {/* Divine Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          {/* Floating lotus petals */}
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute text-4xl opacity-30 animate-float-random`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`,
-              }}
-            >
-              🪷
-            </div>
-          ))}
-
-          {/* Divine light rays */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-yellow-300/20 to-transparent rounded-full animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-blue-300/20 to-transparent rounded-full animate-pulse animation-delay-2000" />
+    <div className="min-h-screen bg-gradient-to-br from-red-600 via-orange-700 to-red-600 relative overflow-hidden flex items-center justify-center">
+      <div className="text-center text-white relative z-10 max-w-2xl mx-auto px-4">
+        <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-red-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl">
+          <span className="text-6xl">🙏</span>
         </div>
+
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-300 via-orange-200 to-yellow-400 bg-clip-text text-transparent">
+          Connection Challenge
+        </h2>
+
+        <p className="text-xl text-orange-200 mb-6">
+          Unable to connect to the spiritual guide at this moment. This may be due to high devotee traffic or server
+          maintenance.
+        </p>
+
+        <button
+          onClick={connectToSpirtualGuide}
+          className="px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-600 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-yellow-300"
+        >
+          <span className="flex items-center justify-center space-x-3">
+            <span className="text-2xl">🔄</span>
+            <span>Try Again with Devotion</span>
+            <span className="text-2xl">🪷</span>
+          </span>
+        </button>
+
+        <p className="text-sm text-yellow-200 mt-4 italic">
+          🕉️ "Krishna will provide when the time is right" - Bhagavad Gita
+        </p>
       </div>
-
-      <main className="container mx-auto px-4 py-16 text-center relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Divine Header */}
-          <div className="text-white mb-16 animate-fade-in">
-            <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl animate-pulse">
-              <span className="text-6xl">🕉️</span>
-            </div>
-
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-orange-200 to-yellow-400 bg-clip-text text-transparent drop-shadow-2xl">
-              Krishna Consciousness
-            </h1>
-
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-300 bg-clip-text text-transparent drop-shadow-xl">
-              Voice Assistant
-            </h2>
-
-            <p className="text-2xl md:text-3xl font-semibold mb-6 text-blue-200">कृष्ण चेतना आवाज सहायक</p>
-
-            <p className="text-xl text-yellow-200 mb-4 max-w-3xl mx-auto leading-relaxed">
-              🙏 Receive divine guidance from an experienced ISKCON monk
-            </p>
-
-            <p className="text-lg text-blue-200 mb-8 max-w-3xl mx-auto">अनुभवी इस्कॉन साधु से दिव्य मार्गदर्शन प्राप्त करें</p>
-
-            {/* Connect Button with Divine Animation */}
-            <button
-              onClick={connectToSpirtualGuide}
-              disabled={isConnecting}
-              className="px-12 py-6 text-xl font-bold text-white bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-600 rounded-full shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed border-2 border-yellow-300 animate-pulse hover:animate-none"
-            >
-              {isConnecting ? (
-                <span className="flex items-center justify-center space-x-3">
-                  <svg className="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  <span>🙏 Connecting to Divine Wisdom...</span>
-                </span>
-              ) : (
-                <span className="flex items-center justify-center space-x-3">
-                  <span className="text-2xl">🎧</span>
-                  <span>Begin Spiritual Journey</span>
-                  <span className="text-2xl">🪷</span>
-                </span>
-              )}
-            </button>
-          </div>
-
-          {/* Spiritual Features Grid */}
-          <div className="grid md:grid-cols-4 gap-8 mb-16">
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-yellow-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <div className="text-5xl mb-4 animate-bounce">📿</div>
-              <h3 className="text-xl font-bold mb-3 text-blue-800">Bhakti Practices</h3>
-              <p className="text-gray-700">Chanting, meditation, and devotional service guidance</p>
-            </div>
-
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <div className="text-5xl mb-4 animate-bounce animation-delay-500">📖</div>
-              <h3 className="text-xl font-bold mb-3 text-orange-800">Bhagavad Gita</h3>
-              <p className="text-gray-700">Krishna's eternal wisdom and practical life guidance</p>
-            </div>
-
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-purple-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <div className="text-5xl mb-4 animate-bounce animation-delay-1000">🪷</div>
-              <h3 className="text-xl font-bold mb-3 text-purple-800">Spiritual Growth</h3>
-              <p className="text-gray-700">Understanding karma, dharma, and life's purpose</p>
-            </div>
-
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-green-200 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <div className="text-5xl mb-4 animate-bounce animation-delay-1500">🕉️</div>
-              <h3 className="text-xl font-bold mb-3 text-green-800">Divine Love</h3>
-              <p className="text-gray-700">Developing devotion and surrender to Krishna</p>
-            </div>
-          </div>
-
-          {/* Sacred Mantras Section */}
-          <div className="mb-16">
-            <div className="bg-gradient-to-r from-blue-900/80 to-purple-900/80 backdrop-blur-sm rounded-3xl p-8 border border-yellow-300 shadow-2xl">
-              <h3 className="text-3xl font-bold mb-6 text-yellow-300">🙏 Maha Mantra 🙏</h3>
-              <p className="text-2xl text-white mb-4 leading-relaxed">
-                Hare Krishna Hare Krishna
-                <br />
-                Krishna Krishna Hare Hare
-                <br />
-                Hare Rama Hare Rama
-                <br />
-                Rama Rama Hare Hare
-              </p>
-              <p className="text-lg text-blue-200">
-                हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे
-                <br />
-                हरे राम हरे राम राम राम हरे हरे
-              </p>
-            </div>
-          </div>
-
-          {/* Spiritual Disclaimer */}
-          <div className="p-6 bg-gradient-to-r from-yellow-100/90 to-orange-100/90 backdrop-blur-sm rounded-2xl border border-yellow-400 text-orange-800 max-w-3xl mx-auto shadow-lg">
-            <div className="flex items-start space-x-3">
-              <span className="text-2xl mt-1">🪷</span>
-              <div>
-                <h4 className="font-bold mb-2 text-lg">Spiritual Guidance Notice</h4>
-                <p className="text-sm leading-relaxed">
-                  This AI assistant shares wisdom from ISKCON tradition and Vedic scriptures for spiritual inspiration.
-                  For deeper understanding, always study under qualified spiritual teachers and authentic scriptures.
-                  Regular chanting, temple association, and guru guidance are essential for spiritual progress.
-                </p>
-                <p className="text-xs mt-2 italic">
-                  🙏 Hare Krishna! May this service help in your journey back to Godhead.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <style jsx>{`
-        @keyframes float-random {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        
-        @keyframes float-delay-1 {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(90deg); }
-        }
-        
-        @keyframes float-delay-2 {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50% { transform: translateY(-25px) scale(1.1); }
-        }
-        
-        @keyframes float-delay-3 {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-18px) rotate(-90deg); }
-        }
-        
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        .animate-float-delay-1 { animation: float-delay-1 4s ease-in-out infinite; }
-        .animate-float-delay-2 { animation: float-delay-2 5s ease-in-out infinite; }
-        .animate-float-delay-3 { animation: float-delay-3 3.5s ease-in-out infinite; }
-        .animate-float-random { animation: float-random 4s ease-in-out infinite; }
-        .animate-fade-in { animation: fade-in 1s ease-out; }
-        .animate-spin-slow { animation: spin 8s linear infinite; }
-        .animation-delay-500 { animation-delay: 0.5s; }
-        .animation-delay-1000 { animation-delay: 1s; }
-        .animation-delay-1500 { animation-delay: 1.5s; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        
-        .bg-gradient-radial {
-          background: radial-gradient(circle, var(--tw-gradient-stops));
-        }
-      `}</style>
     </div>
   )
 }

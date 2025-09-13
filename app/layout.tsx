@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Iskcon Voice Assistant',
+  title: 'ISKCON Voice Assistant',
   description: 'Created by Arav',
 }
 
