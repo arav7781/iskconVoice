@@ -812,28 +812,7 @@ export default function ISKCONLandingPage() {
               </div>
             </div>
 
-            <div className="text-center py-12 border-t border-b border-blue-600/10">
-              <div className="max-w-4xl mx-auto">
-                <h4 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-700 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient bg-300% animate-gradient-x filter drop-shadow-lg text-3d">
-                  The Maha Mantra
-                </h4>
-                <div className="bg-card/30 backdrop-blur-sm rounded-2xl p-8 border border-blue-600/20">
-                  <p className="text-2xl md:text-3xl font-bold mb-4 leading-relaxed text-blue-700">
-                    Hare Krishna Hare Krishna Krishna Krishna Hare Hare
-                    <br />
-                    Hare Rama Hare Rama Rama Rama Hare Hare
-                  </p>
-                  <p className="text-lg md:text-xl text-teal-600 mb-4 leading-relaxed">
-                    हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे
-                    <br />
-                    हरे राम हरे राम राम राम हरे हरे
-                  </p>
-                  <p className="text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                    This sacred mantra purifies the heart and awakens our dormant love for Krishna
-                  </p>
-                </div>
-              </div>
-            </div>
+            
 
             <div className="pt-8 text-center">
               <p className="text-muted-foreground mb-2">
