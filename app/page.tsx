@@ -403,32 +403,6 @@ export default function ISKCONLandingPage() {
         </div>
       </section>
 
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Sacred{" "}
-              <span className="bg-gradient-to-r from-blue-700 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient bg-300% animate-gradient-x filter drop-shadow-lg text-3d">
-                Practices
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Immerse yourself in the timeless spiritual practices that lead to Krishna consciousness and inner
-              transformation.
-            </p>
-          </motion.div>
-        </div>
-
-        <InfiniteScroll items={spiritualTeachings} direction="left" speed={40} />
-        <InfiniteScroll items={spiritualTeachings.slice().reverse()} direction="right" speed={35} />
-      </section>
-
       <section className="py-20 bg-muted/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
@@ -439,6 +413,7 @@ export default function ISKCONLandingPage() {
             className="max-w-6xl mx-auto"
           >
             <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side Content */}
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-8">
                   About{" "}
@@ -448,40 +423,59 @@ export default function ISKCONLandingPage() {
                 </h2>
                 <div className="space-y-6 text-lg text-foreground/80 leading-relaxed">
                   <p>
-                    The International Society for Krishna Consciousness (ISKCON) was founded in 1966 by His Divine Grace
-                    A.C. Bhaktivedanta Swami Prabhupada to teach the science of Krishna consciousness throughout the
-                    world based on the teachings of the Bhagavad-gita and other Vedic scriptures.
+                    The International Society for Krishna Consciousness (ISKCON) was
+                    founded in 1966 by His Divine Grace A.C. Bhaktivedanta Swami
+                    Prabhupada to teach the science of Krishna consciousness
+                    throughout the world based on the teachings of the Bhagavad-gita
+                    and other Vedic scriptures.
                   </p>
                   <p>
-                    ISKCON belongs to the Gaudiya-Vaishnava sampradaya, a monotheistic tradition within the Vedic
-                    culture. Today ISKCON comprises of more than 400 temples, 40 rural communities, 26 educational
-                    institutes and 45 restaurants worldwide.
+                    ISKCON belongs to the Gaudiya-Vaishnava sampradaya, a monotheistic
+                    tradition within the Vedic culture. Today ISKCON comprises of more
+                    than 400 temples, 40 rural communities, 26 educational institutes
+                    and 45 restaurants worldwide.
                   </p>
                   <p>
-                    Our mission is to promote the well-being of society by teaching the science of Krishna consciousness
-                    according to the Bhagavad-gita and other ancient scriptures.
+                    Our mission is to promote the well-being of society by teaching
+                    the science of Krishna consciousness according to the
+                    Bhagavad-gita and other ancient scriptures.
                   </p>
                 </div>
 
                 <div className="mt-8 grid grid-cols-2 gap-6">
                   <div className="text-center p-4 bg-card rounded-lg border border-primary/20">
-                    <div className="text-3xl font-bold text-blue-700 mb-2">400+</div>
-                    <div className="text-sm text-muted-foreground">Temples Worldwide</div>
+                    <div className="text-3xl font-bold text-primary mb-2">400+</div>
+                    <div className="text-sm text-muted-foreground">
+                      Temples Worldwide
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-card rounded-lg border border-secondary/20">
-                    <div className="text-3xl font-bold text-blue-700 mb-2">50+</div>
-                    <div className="text-sm text-muted-foreground">Years of Service</div>
+                    <div className="text-3xl font-bold text-secondary mb-2">50+</div>
+                    <div className="text-sm text-muted-foreground">
+                      Years of Service
+                    </div>
                   </div>
                 </div>
               </div>
 
+              {/* Right Side Floating Icons / Image */}
               <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-blue-600/20 to-teal-600/20 rounded-3xl flex items-center justify-center text-9xl animate-float">
-                  🏛️
+                {/* House Container with Krishna Image */}
+                <div className="aspect-square bg-gradient-to-br from-blue-600/20 to-teal-600/20 rounded-3xl flex items-center justify-center text-9xl animate-float relative overflow-hidden">
+                  <img
+                    src="/krishnaa.png"
+                    alt="Krishna"
+                    className="absolute inset-0 w-full h-full object-contain opacity-80"
+                  />
+                  
                 </div>
+
+                {/* Floating Circle with 🕉️ */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-teal-600 to-emerald-600 rounded-full flex items-center justify-center text-4xl animate-float-reverse">
                   🕉️
                 </div>
+
+                {/* Floating Circle with 🪷 */}
                 <div
                   className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-br from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-3xl animate-float"
                   style={{ animationDelay: "2s" }}
@@ -493,6 +487,7 @@ export default function ISKCONLandingPage() {
           </motion.div>
         </div>
       </section>
+
 
       <section id="spiritual-journey" className="py-20 relative">
         <div className="container mx-auto px-4">
