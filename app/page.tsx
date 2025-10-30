@@ -269,6 +269,10 @@ export default function ISKCONLandingPage() {
     router.push("/spiritual-journey")
   }
 
+  const beginChatbot = () => {
+    router.push("/chatbot")
+  }
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <FloatingElements />
@@ -364,12 +368,16 @@ export default function ISKCONLandingPage() {
             </Button>
 
             <Button
-              variant="outline"
               size="lg"
-              className="px-8 py-6 text-lg border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white transition-all duration-300 bg-white/90 backdrop-blur-sm font-semibold"
+              className="px-12 py-6 text-xl font-bold bg-gradient-to-r from-blue-700 via-blue-600 to-teal-700 hover:from-teal-700 hover:to-emerald-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-0 relative overflow-hidden"
+              onClick={beginSpiritualJourney}
             >
-              <BookOpen className="mr-2 h-5 w-5" />
-              Explore Teachings
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-800 via-blue-700 to-teal-800 z-0"></div>
+              <span className="flex items-center space-x-3 relative z-10 text-white font-bold drop-shadow-lg">
+                <span className="text-2xl filter drop-shadow-sm">🎧</span>
+                <span className="filter drop-shadow-sm">Spiritual Chatbot</span>
+                <span className="text-2xl filter drop-shadow-sm">🪷</span>
+              </span>
             </Button>
           </motion.div>
 
@@ -381,7 +389,7 @@ export default function ISKCONLandingPage() {
           >
             <ChevronDown
               className="w-8 h-8 mx-auto text-muted-foreground animate-bounce cursor-pointer"
-              onClick={beginSpiritualJourney}
+              onClick={beginChatbot}
             />
           </motion.div>
         </div>
