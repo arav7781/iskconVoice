@@ -370,18 +370,20 @@ export default function ISKCONLandingPage() {
             <Button
               size="lg"
               className="px-12 py-6 text-xl font-bold bg-gradient-to-r from-blue-700 via-blue-600 to-teal-700 hover:from-teal-700 hover:to-emerald-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-0 relative overflow-hidden"
-              onClick={beginSpiritualJourney}
+              onClick={beginChatbot}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-800 via-blue-700 to-teal-800 z-0"></div>
               <span className="flex items-center space-x-3 relative z-10 text-white font-bold drop-shadow-lg">
-                <span className="text-2xl filter drop-shadow-sm">🎧</span>
+                <span className="text-2xl filter drop-shadow-sm"> </span>
                 <span className="filter drop-shadow-sm">Spiritual Chatbot</span>
-                <span className="text-2xl filter drop-shadow-sm">🪷</span>
+                <span className="text-2xl filter drop-shadow-sm"> </span>
               </span>
             </Button>
+
+            
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={isHeroInView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 1.5 }}
@@ -389,9 +391,9 @@ export default function ISKCONLandingPage() {
           >
             <ChevronDown
               className="w-8 h-8 mx-auto text-muted-foreground animate-bounce cursor-pointer"
-              onClick={beginChatbot}
+              onClick={beginSpiritualJourney}
             />
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
 
