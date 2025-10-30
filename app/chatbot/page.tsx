@@ -4,7 +4,6 @@ import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { Send, BookOpen, Heart, Star, Sparkles, Loader2, ArrowLeft, Plus, MessageSquare, Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { createBrowserClient } from "@supabase/ssr"
 
 interface Message {
   id: string
@@ -28,34 +27,12 @@ export default function ISKCONBotPage() {
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null)
   const [sessions, setSessions] = useState<ChatSession[]>([])
   const [showSidebar, setShowSidebar] = useState(false)
-  const [user, setUser] = useState<any>(null)
-  const [isLoadingUser, setIsLoadingUser] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const [apiUrl] = useState(process.env.NEXT_PUBLIC_API_URL || "https://aravsaxena884-iskconChatbot.hf.space")
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  )
-
   useEffect(() => {
-    const checkAuth = async () => {
-      const {
-        data: { user: authUser },
-      } = await supabase.auth.getUser()
-
-      if (!authUser) {
-        router.push("/auth/login")
-        return
-      }
-
-      setUser(authUser)
-      await loadSessions()
-      setIsLoadingUser(false)
-    }
-
-    checkAuth()
+    loadSessions()
   }, [])
 
   const loadSessions = async () => {
@@ -121,7 +98,11 @@ export default function ISKCONBotPage() {
 
   const deleteSession = async (sessionId: string) => {
     try {
-      await supabase.from("chat_sessions").delete().eq("id", sessionId)
+      await fetch(`/api/chat/sessions`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId }),
+      })
       setSessions(sessions.filter((s) => s.id !== sessionId))
       if (currentSessionId === sessionId) {
         setMessages([])
@@ -269,13 +250,6 @@ export default function ISKCONBotPage() {
     }
   }
 
-  if (isLoadingUser) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-300 via-yellow-200 to-blue-300 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-orange-600 animate-spin" />
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-300 via-yellow-200 to-blue-300 flex">
