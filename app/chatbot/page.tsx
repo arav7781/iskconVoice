@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef, useEffect } from "react"
-import { Send, BookOpen, Heart, Star, Sparkles, Loader2, ArrowLeft } from "lucide-react"
+import { useState, useRef, useEffect, useCallback } from "react"
+import { Send, BookOpen, Sparkles, Loader2, ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface Message {
@@ -18,19 +18,21 @@ export default function ISKCONBotPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [streamingText, setStreamingText] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const [apiUrl] = useState(process.env.NEXT_PUBLIC_API_URL || "https://aravsaxena884-iskconChatbot.hf.space")
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+  const scrollToBottom = useCallback(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+    }
+  }, [])
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages, streamingText])
+  }, [messages, streamingText, scrollToBottom])
 
   useEffect(() => {
-    // Add welcome message
     const welcomeMessage: Message = {
       id: "welcome",
       text: "Hare Krishna! I am here to help you with any spiritual questions based on the teachings of Srila Prabhupada and Vedic wisdom. Please feel free to ask about philosophy, practice, scriptures, or any aspect of Krishna consciousness.",
@@ -52,18 +54,17 @@ export default function ISKCONBotPage() {
   ]
 
   const streamText = (text: string, messageId: string) => {
-    const sentences = text.split(/(?<=[.!?])\s+/).filter((sentence) => sentence.trim())
+    const chunks = text.split(/(?<=[.!?])\s+/).filter((chunk) => chunk.trim())
     let currentIndex = 0
     let accumulatedText = ""
 
     const streamInterval = setInterval(() => {
-      if (currentIndex < sentences.length) {
-        accumulatedText += (accumulatedText ? " " : "") + sentences[currentIndex]
+      if (currentIndex < chunks.length) {
+        accumulatedText += (accumulatedText ? " " : "") + chunks[currentIndex]
         setStreamingText(accumulatedText)
         currentIndex++
       } else {
         clearInterval(streamInterval)
-        // Add the complete message to messages array
         const botMessage: Message = {
           id: messageId,
           text: accumulatedText,
@@ -74,7 +75,7 @@ export default function ISKCONBotPage() {
         setStreamingText("")
         setIsLoading(false)
       }
-    }, 800) // Delay between sentences
+    }, 300)
   }
 
   const handleSendMessage = async (text: string = inputText) => {
@@ -135,184 +136,455 @@ export default function ISKCONBotPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-300 via-yellow-200 to-blue-300">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 text-8xl">🕉️</div>
-        <div className="absolute top-40 right-32 text-6xl">🪷</div>
-        <div className="absolute bottom-32 left-16 text-7xl">🕉️</div>
-        <div className="absolute bottom-20 right-20 text-5xl">🪷</div>
-        <div className="absolute top-1/2 left-1/3 text-6xl">🕉️</div>
-        {/* Floating lotus petals */}
-        <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-orange-200 rounded-full opacity-30 animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-6 h-6 bg-blue-200 rounded-full opacity-30 animate-pulse delay-1000"></div>
-      </div>
+    <div style={styles.wrapper}>
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #fef3c7;
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(to bottom, #fb923c, #f97316);
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(to bottom, #ea580c, #ea580c);
+        }
+      `}</style>
 
-      <div className="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
-        <div className="flex items-center mb-6">
+      {/* Header - Fixed */}
+      <div style={styles.header}>
+        <div style={styles.headerContent}>
           <button
             onClick={() => router.push("/")}
-            className="flex items-center space-x-2 text-orange-700 hover:text-orange-800 transition-colors"
+            style={styles.backButton}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#b45309")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#b84c0c")}
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="font-medium">Back to Home</span>
+            <ArrowLeft style={{ width: "20px", height: "20px", marginRight: "8px" }} />
+            <span>Back</span>
           </button>
-        </div>
-
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-white p-4 rounded-full shadow-lg mr-4 border-2 border-orange-300">
-              <span className="text-4xl">🕉️</span>
-            </div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent mb-2 drop-shadow-lg">
-                ISKCON Spiritual Guide
-              </h1>
-              <p className="text-lg text-orange-700 font-medium">Vedic Wisdom for Modern Life</p>
-            </div>
+          <div style={styles.headerTitle}>
+            <h1 style={styles.title}>ISKCON Spiritual Guide</h1>
           </div>
-          <div className="flex items-center justify-center space-x-6 text-orange-600">
-            <div className="flex items-center space-x-2">
-              <BookOpen className="w-5 h-5" />
-              <span className="text-sm font-medium">Scriptural Guidance</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Heart className="w-5 h-5" />
-              <span className="text-sm font-medium">Devotional Practice</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Star className="w-5 h-5" />
-              <span className="text-sm font-medium">Spiritual Growth</span>
-            </div>
-          </div>
+          <div style={{ width: "80px" }} />
         </div>
+      </div>
 
-        {/* Main Chat Container */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-4 border-orange-200">
-          {/* Chat Messages */}
-          <div className="h-96 md:h-[500px] overflow-y-auto p-6 bg-gradient-to-b from-orange-50/80 to-yellow-50/80">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex mb-6 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[80%] rounded-2xl px-6 py-4 shadow-lg ${
-                    message.sender === "user"
-                      ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white ml-12"
-                      : "bg-white/90 backdrop-blur-sm border-2 border-orange-200 text-gray-800 mr-12"
-                  }`}
-                >
-                  <div className="flex items-start space-x-3">
-                    {message.sender === "bot" && (
-                      <div className="flex-shrink-0 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                        <span className="text-orange-600 text-sm">🙏</span>
-                      </div>
-                    )}
-                    <div className="flex-1">
-                      <div className="font-semibold mb-1 text-sm">
-                        {message.sender === "user" ? "You" : "Spiritual Guide"}
-                      </div>
-                      <div className="whitespace-pre-wrap leading-relaxed">{message.text}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {streamingText && (
-              <div className="flex justify-start mb-6">
-                <div className="bg-white/90 backdrop-blur-sm border-2 border-orange-200 rounded-2xl px-6 py-4 shadow-lg max-w-[80%]">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                      <span className="text-orange-600 text-sm">🙏</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-semibold mb-1 text-sm text-gray-800">Spiritual Guide</div>
-                      <div className="whitespace-pre-wrap leading-relaxed text-gray-800">
-                        {streamingText}
-                        <span className="inline-block w-2 h-5 bg-orange-500 ml-1 animate-pulse"></span>
+      {/* Main Content */}
+      <div style={styles.mainContent}>
+        {/* Chat Container */}
+        <div style={styles.chatContainer}>
+          {/* Messages Area */}
+          <div ref={messagesContainerRef} style={styles.messagesArea}>
+            <div style={styles.messagesContent}>
+              {messages.map((message) => (
+                <div key={message.id} style={message.sender === "user" ? styles.userMessageRow : styles.botMessageRow}>
+                  <div style={message.sender === "user" ? styles.userMessageBubble : styles.botMessageBubble}>
+                    <div style={styles.messageContentContainer}>
+                      {message.sender === "bot" && <div style={styles.avatar}>🙏</div>}
+                      <div style={styles.messageTextWrapper}>
+                        <div style={styles.messageSender}>{message.sender === "user" ? "You" : "Guide"}</div>
+                        <div style={styles.messageText}>{message.text}</div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              ))}
 
-            {isLoading && !streamingText && (
-              <div className="flex justify-start mb-6">
-                <div className="bg-white/90 backdrop-blur-sm border-2 border-orange-200 rounded-2xl px-6 py-4 shadow-lg max-w-[80%]">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                      <Loader2 className="w-4 h-4 text-orange-600 animate-spin" />
-                    </div>
-                    <div>
-                      <div className="font-semibold mb-1 text-sm text-gray-800">Spiritual Guide</div>
-                      <div className="flex items-center space-x-2 text-gray-600">
-                        <Sparkles className="w-4 h-4 animate-pulse" />
-                        <span className="italic">Contemplating with divine wisdom...</span>
+              {/* Streaming message */}
+              {streamingText && (
+                <div style={styles.botMessageRow}>
+                  <div style={styles.botMessageBubble}>
+                    <div style={styles.messageContentContainer}>
+                      <div style={styles.avatar}>🙏</div>
+                      <div style={styles.messageTextWrapper}>
+                        <div style={styles.messageSender}>Guide</div>
+                        <div style={styles.messageText}>
+                          {streamingText}
+                          <span style={styles.cursor}>█</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div ref={messagesEndRef} />
+              {/* Loading state */}
+              {isLoading && !streamingText && (
+                <div style={styles.botMessageRow}>
+                  <div style={styles.botMessageBubble}>
+                    <div style={styles.messageContentContainer}>
+                      <div style={styles.loaderAvatar}>
+                        <Loader2 style={{ width: "14px", height: "14px", animation: "spin 1s linear infinite" }} />
+                      </div>
+                      <div style={styles.messageTextWrapper}>
+                        <div style={styles.messageSender}>Guide</div>
+                        <div style={styles.loadingText}>
+                          <Sparkles
+                            style={{
+                              width: "14px",
+                              height: "14px",
+                              marginRight: "4px",
+                              animation: "pulse 1.5s ease-in-out infinite",
+                            }}
+                          />
+                          <span style={{ fontStyle: "italic" }}>Thinking...</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div ref={messagesEndRef} />
+            </div>
           </div>
 
           {/* Input Area */}
-          <div className="bg-white/95 backdrop-blur-sm border-t-2 border-orange-200 p-6">
-            <div className="flex space-x-4">
+          <div style={styles.inputArea}>
+            <div style={styles.inputContainer}>
               <textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask your spiritual question... (Press Enter to send)"
-                className="flex-1 resize-none border-2 border-orange-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-4 focus:ring-orange-200 focus:border-orange-400 transition-all duration-200 min-h-[60px] max-h-[120px] bg-white/90"
+                placeholder="Ask your spiritual question..."
+                style={styles.textarea}
                 disabled={isLoading}
                 rows={2}
               />
               <button
                 onClick={() => handleSendMessage()}
                 disabled={isLoading || !inputText.trim()}
-                className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl hover:from-orange-600 hover:to-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                style={{
+                  ...styles.sendButton,
+                  opacity: isLoading || !inputText.trim() ? 0.6 : 1,
+                  cursor: isLoading || !inputText.trim() ? "not-allowed" : "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isLoading && inputText.trim()) {
+                    e.currentTarget.style.background = "linear-gradient(to right, #dc2626, #b91c1c)"
+                    e.currentTarget.style.transform = "translateY(-2px)"
+                    e.currentTarget.style.boxShadow = "0 20px 25px rgba(0, 0, 0, 0.2)"
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "linear-gradient(to right, #ea580c, #f97316)"
+                  e.currentTarget.style.transform = "translateY(0)"
+                  e.currentTarget.style.boxShadow = "0 10px 15px rgba(0, 0, 0, 0.1)"
+                }}
               >
-                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-                <span className="hidden md:inline">Ask</span>
+                {isLoading ? (
+                  <Loader2 style={{ width: "16px", height: "16px", animation: "spin 1s linear infinite" }} />
+                ) : (
+                  <Send style={{ width: "16px", height: "16px" }} />
+                )}
               </button>
             </div>
           </div>
         </div>
 
         {/* Example Questions */}
-        <div className="mt-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border-2 border-orange-200">
-          <h3 className="text-xl font-bold text-orange-800 mb-4 flex items-center">
-            <BookOpen className="w-6 h-6 mr-2" />
-            Example Spiritual Questions
+        <div style={styles.examplesContainer}>
+          <h3 style={styles.examplesTitle}>
+            <BookOpen style={{ width: "16px", height: "16px", marginRight: "8px" }} />
+            Example Questions
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div style={styles.examplesGrid}>
             {exampleQuestions.map((question, index) => (
               <button
                 key={index}
                 onClick={() => handleExampleClick(question)}
-                className="text-left p-4 bg-gradient-to-r from-orange-100/80 to-yellow-100/80 rounded-xl hover:from-orange-200/80 hover:to-yellow-200/80 transition-all duration-200 border border-orange-200 hover:border-orange-300 shadow-sm hover:shadow-md transform hover:-translate-y-1 backdrop-blur-sm"
+                style={styles.exampleButton}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(to right, rgba(254, 165, 112, 0.8), rgba(253, 224, 112, 0.8))"
+                  e.currentTarget.style.borderColor = "#ea580c"
+                  e.currentTarget.style.transform = "translateY(-2px)"
+                  e.currentTarget.style.boxShadow = "0 12px 16px rgba(0, 0, 0, 0.15)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(to right, rgba(254, 215, 170, 0.6), rgba(253, 230, 138, 0.6))"
+                  e.currentTarget.style.borderColor = "#fed7aa"
+                  e.currentTarget.style.transform = "translateY(0)"
+                  e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.08)"
+                }}
               >
-                <div className="flex items-start space-x-3">
-                  <span className="text-orange-500 mt-1">💡</span>
-                  <span className="text-gray-700 text-sm font-medium leading-relaxed">{question}</span>
-                </div>
+                💡 {question.substring(0, 45)}...
               </button>
             ))}
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="mt-8 text-center">
-          <p className="text-orange-700 font-medium mb-2">🕉️ Hare Krishna Hare Krishna Krishna Krishna Hare Hare 🕉️</p>
-          <p className="text-orange-600 text-sm">Based on the teachings of Srila Prabhupada and Vedic scriptures</p>
-        </div>
       </div>
     </div>
   )
+}
+
+const styles = {
+  wrapper: {
+    minHeight: "100vh",
+    background: "linear-gradient(to bottom right, rgb(254, 156, 62), rgb(253, 224, 71), rgb(96, 165, 250))",
+    display: "flex",
+    flexDirection: "column" as const,
+  },
+  header: {
+    position: "fixed" as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 50,
+    background: "rgba(255, 255, 255, 0.95)",
+    backdropFilter: "blur(12px)",
+    borderBottom: "2px solid rgb(254, 215, 170)",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  },
+  headerContent: {
+    maxWidth: "1536px",
+    margin: "0 auto",
+    padding: "0 1rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: "64px",
+  },
+  backButton: {
+    display: "flex",
+    alignItems: "center",
+    color: "#b84c0c",
+    transition: "color 0.3s ease",
+    cursor: "pointer",
+    background: "none",
+    border: "none",
+    fontSize: "16px",
+    fontWeight: "500",
+  },
+  headerTitle: {
+    flex: 1,
+    textAlign: "center" as const,
+  },
+  title: {
+    fontSize: "24px",
+    fontWeight: "bold",
+    background: "linear-gradient(to right, rgb(194, 65, 12), rgb(37, 99, 235))",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    margin: 0,
+  },
+  mainContent: {
+    flex: 1,
+    marginTop: "80px",
+    paddingBottom: "1rem",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
+    maxWidth: "1536px",
+    margin: "80px auto 0 auto",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column" as const,
+    gap: "1rem",
+  },
+  chatContainer: {
+    flex: 1,
+    background: "rgba(255, 255, 255, 0.95)",
+    backdropFilter: "blur(4px)",
+    borderRadius: "16px",
+    boxShadow: "0 20px 25px rgba(0, 0, 0, 0.1)",
+    border: "2px solid rgb(254, 215, 170)",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column" as const,
+  },
+  messagesArea: {
+    flex: 1,
+    overflowY: "auto" as const,
+    background: "linear-gradient(to bottom, rgba(254, 243, 199, 0.5), rgba(254, 230, 138, 0.5))",
+    padding: "1.5rem",
+  },
+  messagesContent: {
+    display: "flex",
+    flexDirection: "column" as const,
+    gap: "1rem",
+  },
+  userMessageRow: {
+    display: "flex",
+    justifyContent: "flex-end",
+    animation: "fadeIn 0.3s ease-in",
+  },
+  botMessageRow: {
+    display: "flex",
+    justifyContent: "flex-start",
+    animation: "fadeIn 0.3s ease-in",
+  },
+  userMessageBubble: {
+    maxWidth: "80%",
+    borderRadius: "12px",
+    padding: "0.75rem 1rem",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+    background: "linear-gradient(to right, rgb(234, 88, 12), rgb(249, 115, 22))",
+    color: "white",
+  },
+  botMessageBubble: {
+    maxWidth: "80%",
+    borderRadius: "12px",
+    padding: "0.75rem 1rem",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+    background: "rgba(255, 255, 255, 0.9)",
+    backdropFilter: "blur(4px)",
+    border: "2px solid rgb(254, 215, 170)",
+    color: "rgb(31, 41, 55)",
+  },
+  messageContentContainer: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "0.5rem",
+  },
+  avatar: {
+    width: "28px",
+    height: "28px",
+    background: "rgb(254, 243, 199)",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    fontSize: "14px",
+    marginTop: "2px",
+  },
+  loaderAvatar: {
+    width: "28px",
+    height: "28px",
+    background: "rgb(254, 243, 199)",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    color: "rgb(234, 88, 12)",
+    marginTop: "2px",
+  },
+  messageTextWrapper: {
+    flex: 1,
+    minWidth: 0,
+  },
+  messageSender: {
+    fontWeight: "600",
+    fontSize: "12px",
+    marginBottom: "4px",
+    opacity: 0.75,
+  },
+  messageText: {
+    fontSize: "14px",
+    lineHeight: "1.5",
+    whiteSpace: "pre-wrap" as const,
+    wordBreak: "break-word" as const,
+  },
+  cursor: {
+    display: "inline-block",
+    width: "2px",
+    height: "16px",
+    background: "rgb(234, 88, 12)",
+    marginLeft: "4px",
+    animation: "pulse 1.5s ease-in-out infinite",
+  },
+  loadingText: {
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+    fontSize: "13px",
+    color: "rgb(75, 85, 99)",
+  },
+  inputArea: {
+    background: "rgba(255, 255, 255, 0.95)",
+    borderTop: "2px solid rgb(254, 215, 170)",
+    padding: "1rem",
+  },
+  inputContainer: {
+    display: "flex",
+    gap: "0.5rem",
+  },
+  textarea: {
+    flex: 1,
+    resize: "none" as const,
+    border: "2px solid rgb(254, 165, 112)",
+    borderRadius: "8px",
+    padding: "0.5rem 1rem",
+    fontSize: "14px",
+    fontFamily: "inherit",
+    minHeight: "44px",
+    maxHeight: "120px",
+    background: "rgba(255, 255, 255, 0.9)",
+    color: "rgb(31, 41, 55)",
+    outline: "none",
+    transition: "all 0.2s ease",
+  } as React.CSSProperties,
+  sendButton: {
+    padding: "0.5rem 1rem",
+    background: "linear-gradient(to right, rgb(234, 88, 12), rgb(249, 115, 22))",
+    color: "white",
+    borderRadius: "8px",
+    border: "none",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    transition: "all 0.2s ease",
+    fontSize: "14px",
+  },
+  examplesContainer: {
+    background: "rgba(255, 255, 255, 0.95)",
+    backdropFilter: "blur(4px)",
+    borderRadius: "12px",
+    boxShadow: "0 10px 15px rgba(0, 0, 0, 0.08)",
+    padding: "1rem",
+    border: "2px solid rgb(254, 215, 170)",
+    maxHeight: "140px",
+    overflowY: "auto" as const,
+  },
+  examplesTitle: {
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "rgb(124, 45, 18)",
+    marginBottom: "0.75rem",
+    display: "flex",
+    alignItems: "center",
+    margin: "0 0 0.75rem 0",
+  },
+  examplesGrid: {
+    display: "flex",
+    flexWrap: "wrap" as const,
+    gap: "0.5rem",
+  },
+  exampleButton: {
+    textAlign: "left" as const,
+    padding: "0.5rem 0.75rem",
+    background: "linear-gradient(to right, rgba(254, 215, 170, 0.6), rgba(253, 230, 138, 0.6))",
+    borderRadius: "8px",
+    border: "1px solid rgb(254, 215, 170)",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.08)",
+    fontSize: "12px",
+    fontWeight: "500",
+    color: "rgb(55, 65, 81)",
+    whiteSpace: "nowrap" as const,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
 }
