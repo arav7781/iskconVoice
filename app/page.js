@@ -354,45 +354,85 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div className="lg:col-span-2 space-y-lg">
-                                {/* Summary Cards Row */}
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-md">
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-primary/5 transition-colors overflow-hidden">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-2 opacity-70">USER IDENTITY</p>
-                                        <p className="text-sm font-bold text-primary group-hover:scale-105 transition-transform truncate w-full px-2" title={result?.user_id || "Waiting..."}>{result?.user_id || "-"}</p>
-                                        <div className="text-[10px] text-on-surface-variant mt-1 opacity-80 flex flex-col">
-                                            <span className="truncate w-full px-2" title={result?.email_id || ""}>{result?.email_id || ""}</span>
-                                            <span>{result?.enrollment_number || ""}</span>
+                                {loading && (
+                                    <div className="space-y-md animate-pulse-fast">
+                                        <div className="h-20 bg-surface-variant/40 rounded-lg w-full"></div>
+                                        <div className="grid grid-cols-3 gap-md">
+                                            <div className="h-28 bg-surface-variant/40 rounded-lg"></div>
+                                            <div className="h-28 bg-surface-variant/40 rounded-lg"></div>
+                                            <div className="h-28 bg-surface-variant/40 rounded-lg"></div>
                                         </div>
                                     </div>
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-primary/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">TOTAL TREES</p>
-                                        <p className="text-[32px] font-bold text-primary group-hover:scale-110 transition-transform">{result?.summary?.total_trees ?? "-"}</p>
-                                    </div>
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-error/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70 text-error/60">TOTAL CYCLES</p>
-                                        <p className="text-[32px] font-bold text-error group-hover:scale-110 transition-transform">{result?.summary?.total_cycles ?? "-"}</p>
-                                    </div>
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-secondary/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">LARGEST ROOT</p>
-                                        <p className="text-[32px] font-bold text-secondary group-hover:scale-110 transition-transform">{result?.summary?.largest_tree_root || "-"}</p>
-                                    </div>
-                                </div>
+                                )}
+                                
+                                {!loading && result && (
+                                    <div className="space-y-lg animate-slide-up">
+                                        <div className="bg-gradient-to-r from-primary to-secondary rounded-lg p-[1.5px] shadow-lg">
+                                            <div className="bg-surface rounded-[6.5px] p-md flex items-center justify-between">
+                                                <div className="flex items-center gap-md">
+                                                    <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-xl font-bold shadow-inner">
+                                                        {result.user_id ? result.user_id.charAt(0).toUpperCase() : "U"}
+                                                    </div>
+                                                    <div>
+                                                        <div className="flex items-center gap-2 mb-0.5">
+                                                            <h3 className="text-xl font-bold text-on-surface leading-none">{result.user_id}</h3>
+                                                            <div className="flex items-center gap-1 bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold border border-green-200">
+                                                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                                Verified
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-center gap-3 mt-1.5 text-xs text-on-surface-variant font-mono">
+                                                            <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">mail</span> {result.email_id}</span>
+                                                            <span className="text-outline-variant opacity-50">•</span>
+                                                            <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">badge</span> {result.enrollment_number}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                <div className="bg-surface rounded-lg p-md neo-raised space-y-md min-h-[600px] flex flex-col relative">
+                                        <div className="grid grid-cols-3 gap-md">
+                                            <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-primary/5 transition-colors">
+                                                <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">TOTAL TREES</p>
+                                                <p className="text-[32px] font-bold text-primary group-hover:scale-110 transition-transform">{result?.summary?.total_trees ?? "-"}</p>
+                                            </div>
+                                            <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-error/5 transition-colors">
+                                                <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70 text-error/60">TOTAL CYCLES</p>
+                                                <p className="text-[32px] font-bold text-error group-hover:scale-110 transition-transform">{result?.summary?.total_cycles ?? "-"}</p>
+                                            </div>
+                                            <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-secondary/5 transition-colors">
+                                                <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">LARGEST ROOT</p>
+                                                <p className="text-[32px] font-bold text-secondary group-hover:scale-110 transition-transform">{result?.summary?.largest_tree_root || "-"}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className={`bg-surface rounded-lg p-md neo-raised space-y-md min-h-[600px] flex flex-col relative transition-opacity duration-300 ${loading ? 'opacity-50 pointer-events-none' : ''}`}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex items-center gap-xs text-primary">
                                             <span className="material-symbols-outlined" data-icon="hub">hub</span>
                                             <h3 className="font-title-md text-title-md">Graph Visualization</h3>
                                         </div>
-                                        {result && (
-                                            <div className="flex gap-sm p-1 neo-inset rounded-full bg-surface-container-low">
+                                        {result && !loading && (
+                                            <div className="flex gap-sm p-1 neo-inset rounded-full bg-surface-container-low animate-fade-in">
                                                 <button className="px-md py-xs rounded-full bg-vibrant-gradient text-white font-bold text-body-sm shadow-md transition-all active:scale-95">Tree View</button>
                                                 <button className="px-md py-xs rounded-full text-on-surface-variant font-bold text-body-sm hover:text-primary transition-colors">Cycle View</button>
                                             </div>
                                         )}
                                     </div>
+                                    
+                                    {loading && (
+                                        <div className="absolute inset-0 z-50 flex items-center justify-center bg-surface/50 backdrop-blur-sm rounded-lg mt-12">
+                                            <div className="flex flex-col items-center gap-3 animate-pulse">
+                                                <span className="material-symbols-outlined text-primary text-5xl animate-spin" style={{ animationDuration: '2s' }}>autorenew</span>
+                                                <p className="text-on-surface-variant font-bold text-sm tracking-widest uppercase">Processing Graph...</p>
+                                            </div>
+                                        </div>
+                                    )}
+
                                     <div className={`flex-grow neo-inset rounded-lg bg-surface-container-low relative ${!result ? 'overflow-hidden flex items-center justify-center' : 'overflow-auto p-md'} group/canvas`}>
                                         <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(#4F46E5 0.8px, transparent 0.8px)", backgroundSize: "32px 32px" }}></div>
                                         
@@ -436,9 +476,9 @@ export default function Home() {
                                                 </div>
                                             </>
                                         ) : (
-                                            <div className="w-full space-y-md z-10 relative">
+                                            <div className="w-full space-y-md z-10 relative animate-fade-in">
                                                 {result.hierarchies?.map((h, i) => (
-                                                    <div key={i} className="bg-surface/90 p-md rounded-lg shadow-md border border-white/60 backdrop-blur-md transition-all hover:shadow-lg">
+                                                    <div key={i} className="bg-surface/90 p-md rounded-lg shadow-md border border-white/60 backdrop-blur-md transition-all hover:shadow-lg animate-slide-up" style={{ animationDelay: `${i * 100}ms` }}>
                                                         <div className="flex items-center gap-3 mb-sm border-b border-outline-variant/30 pb-3">
                                                             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${h.has_cycle ? 'bg-error-container text-error' : 'bg-primary-container text-primary'}`}>
                                                                 <span className="material-symbols-outlined">
