@@ -1,0 +1,105 @@
+.container {
+  padding: 8px 0;
+}
+
+.nodeWrap {
+  position: relative;
+  animation: nodeAppear 0.3s ease both;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  position: relative;
+  user-select: none;
+}
+
+.node:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.node.leaf {
+  cursor: default;
+}
+
+.connector {
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12));
+}
+
+.toggle {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: rgba(var(--node-color), 0.15);
+  background-color: color-mix(in srgb, var(--node-color) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--node-color) 40%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--node-color);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.toggle.open {
+  transform: rotate(0deg);
+}
+
+.toggle:not(.open) {
+  transform: rotate(-90deg);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--node-color);
+  flex-shrink: 0;
+  opacity: 0.6;
+  margin-left: 5px;
+}
+
+.label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--node-color);
+  letter-spacing: 0.05em;
+  min-width: 20px;
+}
+
+.childCount {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.leafBadge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 1px 7px;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+
+.children {
+  margin-left: 26px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255,255,255,0.07);
+  animation: slideDown 0.25s ease both;
+}

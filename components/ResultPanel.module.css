@@ -1,0 +1,84 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: fadeInUp 0.5s ease both;
+}
+
+.identityBanner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.05));
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.identityItem {
+  flex: 1;
+  min-width: 140px;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.identityDivider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(99,102,241,0.15);
+}
+
+.identityLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.identityValue {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sectionTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  color: var(--accent-primary);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.hierarchyList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

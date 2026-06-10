@@ -1,0 +1,83 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconRed {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fca5a5;
+}
+
+.iconAmber {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fcd34d;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chipRed, .chipAmber {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: transform var(--transition-fast);
+}
+
+.chipRed {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+  color: #fca5a5;
+}
+
+.chipRed:hover { transform: scale(1.03); }
+
+.chipAmber {
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.2);
+  color: #fcd34d;
+}
+
+.chipAmber:hover { transform: scale(1.03); }
+
+.chipRed code, .chipAmber code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+}
