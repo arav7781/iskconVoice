@@ -356,26 +356,27 @@ export default function Home() {
                             </div>
 
                             <div className="lg:col-span-2 space-y-lg">
+                                {/* Summary Cards Row */}
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-md">
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center group hover:bg-primary/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">TOTAL NODES</p>
-                                        <p className="text-[32px] font-bold text-primary group-hover:scale-110 transition-transform">{result?.summary?.total_nodes || "0"}</p>
+                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-primary/5 transition-colors overflow-hidden">
+                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-2 opacity-70">USER IDENTITY</p>
+                                        <p className="text-sm font-bold text-primary group-hover:scale-105 transition-transform truncate w-full px-2" title={result?.user_id || "Waiting..."}>{result?.user_id || "-"}</p>
+                                        <div className="text-[10px] text-on-surface-variant mt-1 opacity-80 flex flex-col">
+                                            <span className="truncate w-full px-2" title={result?.email_id || ""}>{result?.email_id || ""}</span>
+                                            <span>{result?.enrollment_number || ""}</span>
+                                        </div>
                                     </div>
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center group hover:bg-primary/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">TOTAL EDGES</p>
-                                        <p className="text-[32px] font-bold text-primary group-hover:scale-110 transition-transform">{result?.summary?.total_edges || "0"}</p>
+                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-primary/5 transition-colors">
+                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">TOTAL TREES</p>
+                                        <p className="text-[32px] font-bold text-primary group-hover:scale-110 transition-transform">{result?.summary?.total_trees ?? "-"}</p>
                                     </div>
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center group hover:bg-error/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70 text-error/60">CYCLES / INVALID</p>
-                                        <p className="text-[32px] font-bold text-error group-hover:scale-110 transition-transform">
-                                            {(result?.invalid_entries?.length || 0).toString().padStart(2, '0')}
-                                        </p>
+                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-error/5 transition-colors">
+                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70 text-error/60">TOTAL CYCLES</p>
+                                        <p className="text-[32px] font-bold text-error group-hover:scale-110 transition-transform">{result?.summary?.total_cycles ?? "-"}</p>
                                     </div>
-                                    <div className="bg-surface p-md rounded-lg neo-raised text-center group hover:bg-secondary/5 transition-colors">
-                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">HIERARCHIES</p>
-                                        <p className="text-[32px] font-bold text-secondary group-hover:scale-110 transition-transform">
-                                            {(result?.hierarchies?.length || 0).toString().padStart(2, '0')}
-                                        </p>
+                                    <div className="bg-surface p-md rounded-lg neo-raised text-center flex flex-col justify-center group hover:bg-secondary/5 transition-colors">
+                                        <p className="text-label-caps font-label-caps text-on-surface-variant mb-1 opacity-70">LARGEST ROOT</p>
+                                        <p className="text-[32px] font-bold text-secondary group-hover:scale-110 transition-transform">{result?.summary?.largest_tree_root || "-"}</p>
                                     </div>
                                 </div>
 
