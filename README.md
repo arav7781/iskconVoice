@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Graph Hierarchy client
 
-## Getting Started
+Next.js front end for the [Graph Hierarchy API](https://github.com/arav7781/aravsaxena-bfhl).
+Live: **[iskcon-voice.vercel.app](https://iskcon-voice.vercel.app)**
 
-First, run the development server:
+Type or paste edges like `A->B`, send them to the API, and see:
+
+- the trees built from each connected group of nodes, rendered as nested lists;
+- which groups contain a cycle;
+- invalid or duplicate entries, with the reason they were rejected;
+- summary cards (number of trees, cycles, the largest tree's root).
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+NEXT_PUBLIC_API_URL=http://localhost:3000 npm run dev    # defaults to the hosted API on Render
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`lib/api.js` holds the single `processGraph(edges)` call to `POST /api/graph`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Tech
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js · React · CSS Modules · Tailwind CSS
